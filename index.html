@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>TODO List</title>
+    <script src="script.js" defer></script>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --solid-black: #000000;
+        --primary-black: #020024;
+        --primary-darkblue: #102782;
+        --nav-bar-background: rgba(255, 255, 255, 0.1);
+        --white: #fff;
+        --primary-lightblue: #2B2DD8;
+        --red: #ff0000;
+        --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --bg-color: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        --text-color: #000000;
+        --accent-color: #2B2DD8;
+        --btn-bg: #ffffff;
+        --btn-border: #d1d5db;
+        --logo-color: #000000;
+        --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    }
+
+    body.dark-mode {
+        --bg-color: linear-gradient(135deg, #0f0f0f, #222222);
+        --text-color: #00ff66;
+        --accent-color: #00d553;
+        --nav-bar-background: rgba(0, 0, 0, 0.5);
+        --btn-bg: #333333;
+        --btn-border: #555555;
+        --logo-color: #00ff66;
+        --shadow: 0 4px 10px rgba(0, 255, 102, 0.2);
+
+    }
+
+    body {
+        font-family: 'Orbitron', sans-serif;
+        min-height: 100vh;
+        background: var(--bg-color);
+        color: var(--text-color);
+
+    }
+
+
+
+    .form-container {
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        position: absolute;
+        top: 20%;
+        left: 40%;
+
+    }
+
+    #new-todo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #1f2937;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    label {
+        display: block;
+        color: #374151;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    input:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    #todo-button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #3b82f6;
+        color: #ffffff;
+        font-weight: 600;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #todo-button {
+        background-color: #2563eb;
+    }
+
+
+
+    html {
+        scroll-behavior: smooth;
+        font-size: 100%;
+    }
+
+    .navbar {
+        background: var(--nav-bar-background);
+        backdrop-filter: blur(0.5rem);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: var(--shadow);
+        position: relative;
+    }
+
+    .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: var(--logo-color);
+
+    }
+
+    .logo:hover {
+        transform: translateX(1rem);
+        scale: 1.2;
+    }
+
+    .theme-toggle-btn {
+        width: 2.8rem;
+        height: 2.8rem;
+        background: var(--btn-bg);
+        border: 1px solid var(--btn-border);
+        border-radius: 0.5rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        transition: var(--transition-standard);
+        z-index: 10;
+    }
+
+    .theme-toggle-btn:hover:not(:disabled) {
+        background: var(--btn-bg);
+        border-color: var(--btn-border);
+        filter: brightness(1.1);
+    }
+
+    .theme-toggle-btn i {
+        scale: 1.5;
+    }
+
+    #todo-title {
+        display: flex;
+        justify-content: center;
+    }
+
+    #todo-title:hover {
+        transform: translateX(1rem);
+        scale: 1.2;
+    }
+
+    #todo-title2 {
+        position: absolute;
+        top: 63%;
+        left: 40%;
+    }
+
+    .table-container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+        width: 100%;
+        position:absolute;
+        top: 70%;
+
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+        background-color: #f9fafb;
+        color: #1f2937;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+    }
+
+    td {
+        color: #374151;
+        font-size: 1rem;
+    }
+
+    tr:hover {
+        background-color: #f1f5f9;
+    }
+
+    .sno {
+        font-size: 1.3rem;
+        width: 3rem;
+        text-align: center;
+    }
+
+    .todo-name {
+        font-size: 1.3rem;
+        width: 20rem;
+    }
+
+    .todo-description {
+        font-size: 1.3rem;
+        width: 30rem;
+    }
+
+    .todo-checkbox{
+        font-size: 1.3rem;
+        width: 8rem;
+    }
+
+    .todo-delete{
+        font-size: 1.3rem;
+        width: 8rem;
+    }
+
+
+</style>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-check"></i>TODO LIST
+        </div>
+        <button class="icon-btn theme-toggle-btn" id="theme-toggle-button" title="Toggle Theme">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+
+    </nav>
+
+    <div class="container">
+        <h1 id='todo-title'>TODOs List</h1>
+        <div class="form-container">
+            <h2 id="new-todo">Add New Todo</h2>
+            <form>
+                <div class="form-group">
+                    <label for="todo-name" id="todo-name">Todo Name</label>
+                    <input type="text" id="todo-name" name="todo-name" placeholder="Enter todo name" required>
+                </div>
+                <div class="form-group">
+                    <label for="todo-description" id="todo-description">Todo Description</label>
+                    <textarea id="todo-description" name="todo-description" placeholder="Enter todo description"
+                        required></textarea>
+                </div>
+                <button type="submit" id="todo-button">Add Todo</button>
+            </form>
+        </div>
+        <form>
+
+        </form>
+        <h1 id="todo-title2">Your TODOs</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="sno">S.NO</th>
+                        <th class="todo-name">Todo Name</th>
+                        <th class="todo-description">Todo Description</th>
+                        <th class="todo-checkbox">Completed</th>
+                        <th class="todo-delete">Delete Todo</th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
