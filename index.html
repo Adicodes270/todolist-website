@@ -36,16 +36,16 @@
     }
 
     body.dark-mode {
-        --bg-color: linear-gradient(135deg, #0f0f0f, #222222);
-        --text-color: #00ff66;
-        --accent-color: #00d553;
-        --nav-bar-background: rgba(0, 0, 0, 0.5);
-        --btn-bg: #333333;
-        --btn-border: #555555;
-        --logo-color: #00ff66;
-        --shadow: 0 4px 10px rgba(0, 255, 102, 0.2);
-
+        --bg-color: linear-gradient(135deg, #0a0a23, #1b1b38);
+        --text-color: #40c4ff;
+        --accent-color: #0288d1;
+        --nav-bar-background: rgba(10, 10, 35, 0.8);
+        --btn-bg: #2a2a5a;
+        --btn-border: #0288d1;
+        --logo-color: #40c4ff;
+        --shadow: 0 4px 15px rgba(64, 196, 255, 0.4);
     }
+
 
     body {
         font-family: 'Orbitron', sans-serif;
@@ -205,7 +205,7 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         overflow-x: auto;
         width: 100%;
-        position:absolute;
+        position: absolute;
         top: 70%;
 
     }
@@ -255,17 +255,45 @@
         width: 30rem;
     }
 
-    .todo-checkbox{
+    .todo-checkbox {
         font-size: 1.3rem;
         width: 8rem;
     }
 
-    .todo-delete{
+    .todo-delete {
         font-size: 1.3rem;
         width: 8rem;
     }
 
+    body.dark-mode table {
+        background-color: #1b1b38;
+        color: #40c4ff;
+    }
 
+    body.dark-mode th {
+        background-color: #2a2a5a;
+        color: #40c4ff;
+        border-bottom: 1px solid #0288d1;
+    }
+
+    body.dark-mode td {
+        color: #40c4ff;
+        border-bottom: 1px solid #0288d1;
+    }
+
+    body.dark-mode tr:hover {
+        background-color: #3a3a6a;
+    }
+
+    .completed-todo {
+        text-decoration: line-through;
+        opacity: 0.6;
+        color: #9ca3af;
+    }
+
+    body.dark-mode .completed-todo {
+        color: #6b7280;
+    }
 </style>
 
 <body>
@@ -283,22 +311,21 @@
         <h1 id='todo-title'>TODOs List</h1>
         <div class="form-container">
             <h2 id="new-todo">Add New Todo</h2>
-            <form>
-                <div class="form-group">
-                    <label for="todo-name" id="todo-name">Todo Name</label>
-                    <input type="text" id="todo-name" name="todo-name" placeholder="Enter todo name" required>
-                </div>
-                <div class="form-group">
-                    <label for="todo-description" id="todo-description">Todo Description</label>
-                    <textarea id="todo-description" name="todo-description" placeholder="Enter todo description"
-                        required></textarea>
-                </div>
-                <button type="submit" id="todo-button">Add Todo</button>
-            </form>
-        </div>
-        <form>
 
-        </form>
+            <div class="form-group">
+                <label for="todo-name" id="todo-name-input">Todo Name</label>
+                <input type="text" id="todo-name" name="todo-name" placeholder="Enter todo name" required>
+            </div>
+            <div class="form-group">
+                <label for="todo-description" id="todo-description-input">Todo Description</label>
+                <textarea id="todo-description" name="todo-description" placeholder="Enter todo description"
+                    required></textarea>
+            </div>
+            <button type="submit" id="todo-button">Add Todo</button>
+        </div>
+
+
+
         <h1 id="todo-title2">Your TODOs</h1>
         <div class="table-container">
             <table>
